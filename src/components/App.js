@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { handleInitialData } from '../actions/shared';
 import Dashboard from './Dashboard';
+import LoadingBar from 'react-redux-loading';
 
 class App extends Component {
   componentDidMount() {
@@ -9,12 +10,22 @@ class App extends Component {
   }
 
   render() {
+    const {loaded} = this.props
     return (
       <div>
-        <Dashboard />
+        <LoadingBar style={{backgroundColor: 'teal'}} />
+        {loaded === true?
+          <Dashboard />
+        :null}
       </div>
     )
   }
 }
 
-export default connect()(App)
+function mapStateToProps({ authedUser }) {
+  return {
+    loaded: authedUser !== null ? true : false
+  }
+}
+
+export default connect(mapStateToProps)(App);
