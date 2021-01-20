@@ -21,7 +21,7 @@ export class Tweet extends Component {
             id: tweet.id,
             hasLiked: tweet.hasLiked,
             authedUser
-        }))
+        }));
     }
 
     render() {
