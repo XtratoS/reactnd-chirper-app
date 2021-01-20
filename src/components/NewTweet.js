@@ -1,20 +1,27 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
+import { handleAddTweet } from '../actions/tweets';
 
 export class NewTweet extends Component {
     state = {
-        text: ''
+        text: '',
+        inputDisabled: false
     }
 
     handleChange = (event) => {
+        event.preventDefault();
         const text = event.target.value;
         this.setState({text});
     }
 
     submitTweet = (event) => {
+        event.preventDefault();
         const { text } = this.state;
-        this.setState({text: ''})
-        console.log(this.state.text);
+        const { dispatch, id } = this.props;
+        this.setState({text: ''});
+        // console.log(this.state.text);
         // Actually send the tweet
+        dispatch(handleAddTweet({text, id}));
     }
 
     render() {
@@ -46,7 +53,7 @@ export class NewTweet extends Component {
                         type="button"
                         className="btn"
                         onClick={this.submitTweet}
-                        disabled={text.length <= 0}
+                        disabled={text.length <= 0 || this.state.inputDisabled}
                     >
                         Tweet
                     </button>
@@ -56,4 +63,4 @@ export class NewTweet extends Component {
     }
 }
 
-export default NewTweet
+export default connect()(NewTweet);
