@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { handleAddTweet } from '../actions/tweets';
 
-export class NewTweet extends Component {
+class NewTweet extends Component {
     state = {
         text: '',
         inputDisabled: false
@@ -21,7 +21,7 @@ export class NewTweet extends Component {
         this.setState({text: ''});
         // console.log(this.state.text);
         // Actually send the tweet
-        dispatch(handleAddTweet({text, id}));
+        dispatch(handleAddTweet({text, replyingTo: id}));
     }
 
     render() {

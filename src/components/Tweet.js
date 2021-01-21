@@ -6,7 +6,7 @@ import { TiHeartOutline } from 'react-icons/ti';
 import { TiHeartFullOutline } from 'react-icons/ti';
 import { handleToggleTweet } from '../actions/tweets';
 
-export class Tweet extends Component {
+class Tweet extends Component {
     redirectToParent = (event, parentId) => {
         event.preventDefault();
         console.log(event.target, parentId);
